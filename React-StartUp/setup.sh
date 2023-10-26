@@ -10,8 +10,8 @@ read ipt
 # ディレクトリの作成
 mkdir $ipt
 
-# run.shのコピー
-cp run.sh $ipt/run.sh
+# # run.shのコピー
+# cp run.sh $ipt/run.sh
 
 # 移動
 cd $ipt
@@ -23,7 +23,7 @@ npm init -y
 npm i react react-dom serve
 npm i --save-dev  webpack webpack-cli
 npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react
-npm i --save-dev syle-loader css-loader
+npm i --save-dev style-loader css-loader
 
 # webpackの設定を記述
 cat << EOF > webpack.config.js
@@ -112,3 +112,9 @@ EOF
 # cssファイルの作成
 mkdir -p src/css
 touch src/css/styles.css
+
+# run.shの作成
+cat << EOF > ./run.sh
+#!/bin/bash
+npm run build && serve ./dist
+EOF
