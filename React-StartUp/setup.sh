@@ -124,7 +124,6 @@ h1 {
     font-size: 2.5em;
     color: #61DAFB; 
     padding: 10px 20px;
-    text-shadow: 3px 3px 0 #3BAEDC, 6px 6px 0 #2A8BB9; 
     background-image: linear-gradient(to right, #282C34, #61DAFB, #282C34); 
     -webkit-background-clip: text;
     color: transparent;
@@ -139,6 +138,34 @@ h1::before {
     height: 3px;
     background-image: linear-gradient(to right, #61DAFB, #3BAEDC); 
     border-radius: 3px;
+}
+
+@keyframes titleHover {
+    0% {
+        color: transparent;
+        text-shadow: 3px 3px 0 #3BAEDC, 6px 6px 0 #2A8BB9;
+    }
+    100% {
+        color: #61DAFB;
+        text-shadow: 0 0 5px #3BAEDC, 0 0 10px #2A8BB9;
+    }
+}
+
+h1:hover {
+    animation: titleHover 0.5s forwards;
+}
+
+@keyframes underlineAnimation {
+    0% {
+        box-shadow: 0 0 5px #3BAEDC, 0 0 10px #2A8BB9;
+    }
+    100% {
+        box-shadow: 0 0 15px #3BAEDC, 0 0 20px #2A8BB9;
+    }
+}
+
+h1:hover::before {
+    animation: underlineAnimation 0.5s forwards;
 }
 EOF
 
