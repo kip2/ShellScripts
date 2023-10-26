@@ -88,16 +88,17 @@ mkdir -p src/components
 cat << EOF > ./src/index.js
 import React from "react";
 import { render } from "react-dom";
-import Hello from "./components/Hello";
+import App from "./components/App";
 
-render(<Hello />, document.getElementById("root"));
+render(<App />, document.getElementById("root"));
 EOF
 
 # src/components/Hello.jsの作成
-cat << EOF > ./src/components/Hello.js
+cat << EOF > ./src/components/App.js
 import React from "react";
+import sytles from "../css/styles.css";
 
-export default function Hello() {
+export default function App() {
 	return (
 	  <>
 	    <h1>Hello React!</h1>
@@ -108,7 +109,38 @@ EOF
 
 # cssファイルの作成
 mkdir -p src/css
-touch src/css/styles.css
+cat << EOF > ./src/css/styles.css
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #282C34; 
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    position: relative;
+    font-size: 2.5em;
+    color: #61DAFB; 
+    padding: 10px 20px;
+    text-shadow: 3px 3px 0 #3BAEDC, 6px 6px 0 #2A8BB9; 
+    background-image: linear-gradient(to right, #282C34, #61DAFB, #282C34); 
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+h1::before {
+    content: '';
+    position: absolute;
+    left: 5%; 
+    right: 5%; 
+    bottom: -10px; 
+    height: 3px;
+    background-image: linear-gradient(to right, #61DAFB, #3BAEDC); 
+    border-radius: 3px;
+}
+EOF
 
 # run.shの作成
 cat << EOF > ./run.sh
