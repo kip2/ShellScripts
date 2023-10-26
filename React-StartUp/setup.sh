@@ -10,9 +10,6 @@ read ipt
 # ディレクトリの作成
 mkdir $ipt
 
-# # run.shのコピー
-# cp run.sh $ipt/run.sh
-
 # 移動
 cd $ipt
 
