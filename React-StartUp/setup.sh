@@ -23,6 +23,7 @@ npm init -y
 npm i react react-dom serve
 npm i --save-dev  webpack webpack-cli
 npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react
+npm i --save-dev syle-loader css-loader
 
 # webpackの設定を記述
 cat << EOF > webpack.config.js
@@ -35,7 +36,27 @@ module.exports = {
 		filename: "bundle.js"
 	},
 	module: {
-		rules: [{ test: /\.js$/, exclude: /node_modules/, loader: "babel-loader"}]
+		rules: [
+			{ 
+				test: /\.js$/, 
+				exclude: /node_modules/, 
+				loader: "babel-loader"
+			},
+			{
+				test: /\.css$/,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							modules: {
+								localIdentName: "[name]__[local]___[hash:base64:5]",
+							},
+						},
+					},
+				],
+			},
+		]
 	}
 };
 EOF
@@ -87,3 +108,7 @@ export default function Hello() {
 	);
 }
 EOF
+
+# cssファイルの作成
+mkdir -p src/css
+touch src/css/styles.css
