@@ -113,6 +113,7 @@ cat << EOF > ./src/css/styles.css
 body {
     font-family: 'Arial', sans-serif;
     background-color: #282C34; 
+    color: #61DAFB; 
     display: flex;
     height: 100vh;
     align-items: center;
