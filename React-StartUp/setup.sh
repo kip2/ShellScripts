@@ -59,7 +59,11 @@ module.exports = {
 EOF
 
 # babelrcに設定を追加
-echo '{\n    "presets": ["@babel/preset-env", "@babel/preset-react"]\n}' > .babelrc
+cat << EOF > .babelrc
+{    
+    "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+EOF
 
 # package.jsonに定義を追加
 sed -i '/"scripts": {/a \ \     "build": "webpack --mode production",' package.json
