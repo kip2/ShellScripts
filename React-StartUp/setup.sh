@@ -19,18 +19,27 @@ npm init -y
 # 必要な依存関係のインストール
 npm i react react-dom serve
 npm i --save-dev  webpack webpack-cli
-npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react
+npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/register
 npm i --save-dev style-loader css-loader
 
 # webpackの設定を記述
 cat << EOF > webpack.config.js
-var path = require("path");
+require('@babel/register');
+module.exports = require('./development');
+EOF
 
-module.exports = {
+# webpackの実際の設定(ES6式の記述で設定)
+cat << EOF > development.js
+import path from "path"
+
+const src = path.resolve(__dirname, "src")
+const dist = path.resolve(__dirname, "dist/assets")
+
+export default {
 	devtool: "source-map",
-	entry: "./src/index.js",
+	entry: src + "/index.js",
 	output: {
-		path: path.join(__dirname, "dist", "assets"),
+		path: dist,
 		filename: "bundle.js"
 	},
 	module: {
@@ -59,12 +68,9 @@ module.exports = {
 };
 EOF
 
+
 # babelrcに設定を追加
-cat << EOF > .babelrc
-{    
-    "presets": ["@babel/preset-env", "@babel/preset-react"]
-}
-EOF
+echo '{\n    "presets": ["@babel/preset-env", "@babel/preset-react"]\n}' > .babelrc
 
 # package.jsonに定義を追加
 sed -i '/"scripts": {/a \ \     "build": "webpack --mode production",' package.json
@@ -187,3 +193,9 @@ npm run build
 
 serve ./dist
 EOF
+
+# ちょっと間をおく
+sleep 2
+
+# ビルドのテスト
+. run.sh
