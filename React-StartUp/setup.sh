@@ -131,10 +131,11 @@ mkdir -p src/components
 # src/index.jsの作成
 cat << EOF > ./src/index.js
 import React from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./components/App";
 
-render(<App />, document.getElementById("root"));
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
 EOF
 
 # src/components/Hello.jsの作成
