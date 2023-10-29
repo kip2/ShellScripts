@@ -27,6 +27,11 @@ npm i eslint --save-dev
 npm i --save-dev eslint-plugin-react@latest
 cat << EOF > .eslintrc.json
 {
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true
