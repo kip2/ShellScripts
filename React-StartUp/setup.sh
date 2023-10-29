@@ -22,6 +22,39 @@ npm i --save-dev  webpack webpack-cli
 npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/register
 npm i --save-dev style-loader css-loader
 
+# eslintのインストール
+npm i eslint --save-dev
+npm i --save-dev eslint-plugin-react@latest
+cat << EOF > .eslintrc.json
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+    }
+}
+EOF
+
+# .eslintignoreを作成
+cat << EOF > .eslintignore
+dist/assets
+webpack.config.js
+development.js
+EOF
+
+
 # webpackの設定を記述
 cat << EOF > webpack.config.js
 require('@babel/register');
@@ -111,9 +144,9 @@ import sytles from "../css/styles.css";
 
 export default function App() {
 	return (
-	  <>
-	    <h1>Hello React!</h1>
-	  </>
+		<>
+			<h1>Hello React!</h1>
+		</>
 	);
 }
 EOF
