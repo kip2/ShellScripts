@@ -22,6 +22,26 @@ node: 18.10.0
 
 # 使い方
 
+## startup.shでインストールされるもの
+
+- gh-pages: deploy用。ホームページの記述のみ、後から付け足す必要がある
+- eslint: pluginとして、esint-plugin-react-hooks
+
+### コマンド
+
+```shell
+# buildコマンド
+npm run build
+
+# linterコマンド
+npm run lint
+
+# deployコマンド
+# 先に、ホームページの設定をpackage.jsonに記載してから
+npm run deploy
+```
+
+
 ## startup.shの使い方
 
 1. startup.shの起動
