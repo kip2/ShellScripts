@@ -25,6 +25,7 @@ npm i --save-dev style-loader css-loader
 # eslintのインストール
 npm i eslint --save-dev
 npm i --save-dev eslint-plugin-react@latest
+npm i --save-dev eslint-plugin-react-hooks
 cat << EOF > .eslintrc.json
 {
     "settings": {
@@ -45,9 +46,13 @@ cat << EOF > .eslintrc.json
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "react-hooks"
     ],
     "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off"
     }
 }
 EOF
