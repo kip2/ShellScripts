@@ -22,6 +22,9 @@ npm i --save-dev  webpack webpack-cli
 npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/register
 npm i --save-dev style-loader css-loader
 
+# deploy用モジュールのインストール
+npm i --save-dev gh-pages 
+
 # eslintのインストール
 npm i eslint --save-dev
 npm i --save-dev eslint-plugin-react@latest
@@ -116,7 +119,7 @@ EOF
 echo '{\n    "presets": ["@babel/preset-env", "@babel/preset-react"]\n}' > .babelrc
 
 # package.jsonに定義を追加
-sed -i '/"scripts": {/a \ \     "build": "webpack --mode production",' package.json
+sed -i '/"scripts": {/a \ \   "lint": "eslint", "predeploy": "npm run build", "deploy": "gh-pages -d dist", "build": "webpack --mode production",' package.json
 
 # distにバンドルファイルをロードするファイルを設置
 mkdir dist
