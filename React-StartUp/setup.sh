@@ -140,7 +140,7 @@ EOF
 # src/components/Hello.jsの作成
 cat << EOF > ./src/components/App.js
 import React from "react";
-import sytles from "../css/styles.css";
+import "../css/styles.css";
 
 export default function App() {
 	return (
