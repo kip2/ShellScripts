@@ -16,6 +16,35 @@ cd $ipt
 # elmの初期化
 echo y | elm init
 
+# index.htmlの作成
+cat << EOF > index.html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Elm App</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+    <div id="elm-root"></div>
+    <script src="elm.js"></script>
+	<script>
+		var app = Elm.Main.init({
+			node: document.getElementById('elm-root')
+		})
+	</script>
+</body>
+</html>
+EOF
+
+# cssファイルの作成
+mkdir css
+cat << EOF > css/styles.css
+.my-class {
+    color: purple;
+}
+EOF
+
 # 雛形ファイルの作成
 cat << EOF > src/Main.elm
 module Main exposing (main)
@@ -53,14 +82,13 @@ update msg model =
 
 view : Model -> Html msg
 view model = 
-    text "test"
+    div []
+        [
+            h1 [ class "my-class" ] [ text "Hello, Elm!!!"]
+        ]
 EOF
 
 # run.shを作成
 cat << EOF > ./run.sh
-elm-live src/Main.elm --open
+elm-live src/Main.elm --open -- --output=elm.js
 EOF
-
-# 少し間をおく
-sleep 2
-
